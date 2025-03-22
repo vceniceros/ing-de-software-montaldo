@@ -4,7 +4,7 @@ tortorella es empleado de kleer, esta en la consultoria, basicamente mejoran las
 
 ## tableron kanban
 
-![alt text](image.png)
+![alt text](imagenesDeAgilidad\image.png)
 
 son tableros donde los "tickets" son tareas que se deben realizar, cuenta con un todo, in progress y done, aunque pueden tener tarjetas segun que proyecto se busque
 
@@ -16,7 +16,7 @@ Relaciones de calidad = resultados de calidad
 
 es dividir las tareas en 4 tipos
 
-![alt text](image-1.png)
+![alt text](imagenesDeAgilidad\image-1.png)
 
 ### Claro
 
@@ -53,7 +53,7 @@ Actuar/Detectar/Responder
 
 todo lo que esta en el medio y donde mayor conflicto existe
 
-![alt text](image-2.png)
+![alt text](imagenesDeAgilidad\image-2.png)
 
 ## que es y que no es agilidad
 
@@ -93,7 +93,7 @@ son ciertos manifiestos y principios
 
 ## scrum, agilie y xp
 
-![alt text](image-4.png)
+![alt text](imagenesDeAgilidad\image-4.png)
 
 el en desarrollo tradicional el analisis, el diseño y el desarrollo se dividen en partes distintas, en el agile todos trabajan al mismo tiempo en una parte especifica, la idea es tener entregables y feedback mas temprano
 
@@ -101,7 +101,7 @@ TDD es una metodologia agil
 
 ## XP (extreme programmign)
 
-![alt text](image-5.png)
+![alt text](imagenesDeAgilidad\image-5.png)
 
 [pagina sobre XP](http://www.extremeprogramming.org/rules.html)
 
@@ -109,8 +109,8 @@ mob programming: todos en la misma pantalla
 
 ## corazon de la agilidad
 
-![alt text](image-6.png)
+![alt text](imagenesDeAgilidad\image-6.png)
 
-![alt text](image-7.png)
+![alt text](imagenesDeAgilidad\image-7.png)
 
-![alt text](image-8.png)
+![alt text](imagenesDeAgilidad\image-8.png)
