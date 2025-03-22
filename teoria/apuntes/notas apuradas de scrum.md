@@ -1,6 +1,6 @@
 # scrum
 
-![alt text](image.png)
+![alt text](imagenesDeScrum\image.png)
 
 ## scrum master
 
@@ -57,9 +57,9 @@ al fin del spring se hace la retro, es el ultimo dia del spring post review, se 
 
 ## springs image
 
-![alt text](image-1.png)
+![alt text](imagenesDeScrum\image-1.png)
 
-![alt text](image-2.png)
+![alt text](imagenesDeScrum\image-2.png)
 
 
 ## refinamiento del backlog
@@ -82,7 +82,7 @@ cantidad de puntos o history ponts que costo cada spring, se hace un historico d
 
 ### burndown chart
 
-![alt text](image-3.png)
+![alt text](imagenesDeScrum\image-3.png)
 
 es un balance entre los story points estimados por sprint vs los story points diarios que fueron descendiendo , se divide en 2 lineas, la ideal que es la promediada vs la real
 
@@ -94,14 +94,14 @@ es un modulo / conjunto de historias
 
 a cada epica se le definen su costo en history points y se calculo durante el spring el que tanto demoro esa epica en puntos 
 
-![alt text](image-4.png)
+![alt text](imagenesDeScrum\image-4.png)
 
 
 ### estimaciones practicas
 
 distintas historias
 
-![alt text](image-5.png)
+![alt text](imagenesDeScrum\image-5.png)
 
 antes de estimar una epica se hacen 400 preguntas para poder dividirla en partes
 
@@ -121,7 +121,7 @@ post entrevista son los criterios definidos para decir que efectivamente se llev
 
 un mes de sprint debe tomar maximo 8 hrs de esta ceremonia, lo importante es poner en comun el entendimiento de los requerimientos del proyecto, la idea e poner en claro que se busca en dicho proyecto , ayuda a ser transparente, ayuda tambien a estimar correctamente, lo importante es que todos entiendan la misma informacion, participa el scrum master, los devs y los product owner, state holders (son los interesados en el producto) (normalmente no partipan)
 
-![alt text](image-6.png)
+![alt text](imagenesDeScrum\image-6.png)
 
 #### porque 
 
@@ -153,7 +153,7 @@ no es lo mas copado hacerlos en la misma llamada, se hacen al ultimo dia
 
 se reunon los team devps y scrum master donde se le muestra al product owner y stake holder que es lo que se logro, se muestran los logros y se muestra que se hizo yh que se logor
 
-![alt text](image-7.png)
+![alt text](imagenesDeScrum\image-7.png)
 
 
 ### retrospectiva
@@ -164,8 +164,8 @@ se ve lo malo con el objetivo de no repetir eso y se busca lo bueno para repetri
 
 todo lo hicimos lo mejor que pudimos 
 
-![alt text](image-8.png)
+![alt text](imagenesDeScrum\image-8.png)
 
-![alt text](image-9.png)
+![alt text](imagenesDeScrum\image-9.png)
 
-![alt text](image-10.png)
+![alt text](imagenesDeScrum\image-10.png)
