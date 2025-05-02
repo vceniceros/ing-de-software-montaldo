@@ -54,3 +54,20 @@ es la vuelta a las bases, el alumno vuelve al estadio inicial para no perder las
 
 ![alt text](agilidadimagenes\image-1.png)
 
+## el corazon se expande
+
+si bien los 4 verbos son bastante completos, hay una version expandida del corazon que estaria bueno indagar
+
+![alt text](image-2.png)
+
+### colaborar
+
+para que el equipo colabore necesita confianza, sobre como generar confianza existen miles de libros, mismo para generar motivos de colaboracion, la realidad es que sea como sea que se genere tanto la confianza como los motivos para colaborar estos son fundamentales para la colaboracion del equipo
+
+### entrega
+
+tiene aspectos internos y externos  internamente es la manofactura Lean, gestion de cuellos de botella, limites de WIP y procesos tecnologicos y sociales para la entrega, o sea son las formas de entregar contenido de software, en lo externo encontramos entregar para obtener valor, para obtener aprendizaje, entregar para estudiar el mercado, son los porque de los outputs
+
+### Reflexionar y mejorar
+
+estan estrechamente relacionados pero suelen estar separados debido a que la gente no suele reflexionar correctamente, es escencial detenerse a analizar tanto a nivel emocional como empirico el resultado de las cosas para luego poder mejorar

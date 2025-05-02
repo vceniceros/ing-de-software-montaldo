@@ -207,3 +207,256 @@ a veces no habra ingenieros en tu equipo por tanto usar nombres del dominio del 
 
 suponiendo que en un metodo encontramos variablers como nombre, apellido, calle, numeroDeCasa, ciudad y estado entendemos que eso son valores de direccion, ahora si encontramos "estado" por si solo cualquiera que sepa de patrones de diseño podria apresurar conclusiones
 
+### no añadir contexto gratuito 
+
+procura que en un mismo modulo no se sobreespecifique el codigo o clase en cuestion pertenece a ese modulo, a menos caracteres en el nombre mucho mejor, los nombres tienen que tener el largo suficiente como para entenderlos
+
+### la ultima palabra
+
+no hay que tener miedo en renombrar un metodo o clase si es necesario, a veces los cambios son para mejor, muchas veces un programador ni se acuerda los nomrbes solo usa las herramientas del IDE para llamar a la clase, por eso el "Nombre definitivo" siempre esta en el momento ideal para modificarlo en caso de que este traiga una mejoria
+
+
+## capitulo 3 funciones
+
+de los primeros dias de la programacion la unica estructura que aa dia de hoy sobrevive son las funciones
+
+vamos con el siguiente ejemplo
+```java
+
+public static String testableHtml(
+PageData pageData,
+boolean includeSuiteSetup
+) throws Exception {
+WikiPage wikiPage = pageData.getWikiPage();
+StringBuffer buffer = new StringBuffer();
+if (pageData.hasAttribute("Test")) {
+if (includeSuiteSetup) {
+WikiPage suiteSetup =
+PageCrawlerImpl.getInheritedPage(
+SuiteResponder.SUITE_SETUP_NAME, wikiPage
+);
+if (suiteSetup != null) {
+WikiPagePath pagePath =
+suiteSetup.getPageCrawler().getFullPath(suiteSetup);
+String pagePathName = PathParser.render(pagePath);
+buffer.append("!include -setup .")
+.append(pagePathName)
+.append("\n");
+}
+}
+WikiPage setup =
+PageCrawlerImpl.getInheritedPage("SetUp", wikiPage);
+if (setup != null) {
+WikiPagePath setupPath =
+wikiPage.getPageCrawler().getFullPath(setup);
+String setupPathName = PathParser.render(setupPath);
+buffer.append("!include -setup .")
+.append(setupPathName)
+.append("\n");
+}
+}
+buffer.append(pageData.getContent());
+if (pageData.hasAttribute("Test")) {
+WikiPage teardown =
+PageCrawlerImpl.getInheritedPage("TearDown", wikiPage);
+if (teardown != null) {
+WikiPagePath tearDownPath =
+wikiPage.getPageCrawler().getFullPath(teardown);
+String tearDownPathName = PathParser.render(tearDownPath);
+buffer.append("\n")
+.append("!include -teardown .")
+.append(tearDownPathName)
+.append("\n");
+}
+if (includeSuiteSetup) {
+WikiPage suiteTeardown =
+PageCrawlerImpl.getInheritedPage(
+SuiteResponder.SUITE_TEARDOWN_NAME,
+wikiPage
+);
+if (suiteTeardown != null) {
+WikiPagePath pagePath =
+suiteTeardown.getPageCrawler().getFullPath (suiteTeardown);
+String pagePathName = PathParser.render(pagePath);
+buffer.append("!include -teardown .")
+.append(pagePathName)
+.append("\n");
+}
+}
+}
+pageData.setContent(buffer.toString());
+return pageData.getHtml();
+}
+```
+
+esta como ilegible no? bueno ese es el punto, muchos if anidados, no se entiende donde empieza ni donde termina algo entonces, el siguiente codigo
+
+```java
+public static String renderPageWithSetupsAndTeardowns(
+PageData pageData, boolean isSuite
+) throws Exception {
+boolean isTestPage = pageData.hasAttribute("Test");
+if (isTestPage) {
+WikiPage testPage = pageData.getWikiPage();
+StringBuffer newPageContent = new StringBuffer();
+includeSetupPages(testPage, newPageContent, isSuite);
+newPageContent.append(pageData.getContent());
+includeTeardownPages(testPage, newPageContent, isSuite);
+pageData.setContent(newPageContent.toString());
+}
+return pageData.getHtml();
+}
+
+```
+
+capaz no sabes como funciona cada funcion pero al menos entendes que se supone que hace cada cosa, es por eso que las funciones existen
+
+### pequeñas, small, cortas
+
+la primera regla es que una funcion debe ser corta, la segunda es que debe ser muy corta, tan corto como sea posible, si una funcion supera las 30 lineas posiblemente algo no este correcto
+
+### bloque e identacion
+
+todo bloque de if, else y while deberia no ser mayor a una linea, tanto asi como para poder ser remplazado con una funcion, 3 bloques de identacion alcanzan y sobran en este contexto, la idea es no tener funciones anidadas
+
+### do one thing
+
+una funcion debe hacer una cosa, la debe hacer bien, la debe hacer ella
+
+### secciones con funciones
+
+un programa deberia poder ser dividido en secciones donde cada una sea una funcion
+
+### un nivel de abstraccion por funcion
+
+sabes que estas segmentando mal cuando una funcion toca al mismo tiempo dos niveles de abstraccion distintas, por ejemplo no tiene sentido que una funcion toque al mismo tiempo un strign y una clase abstracta
+
+### leer de arriba para abajo (stepdown rule)
+
+la idea es que de arriba para abajo se pueda ir leyendo cada funcion en orden de ejecucion de manera tal que al llegar a la ultima encontremos a la cual depende de todas las demas
+
+### switches
+
+no usarlos, o sea si, pero reducirlo lo mas que se pueda con polimorfismo
+
+### nombres descriptivo
+
+mismo que en el capitulo anterior una funcion debe tener un nombre corto que diga exactamente lo que hace
+
+### argumentos de una funcion
+
+deben ser lo mas reducidos posible, de no se evitable entonces estos deben ser tan descriptivos como sea posible, las funciones pueden ser categoriazadas como niladic (sin argumentos), monadic (1), diadic(2), triadic(3) y poliadic
+
+## capitulo 4 comentarios
+
+un buen comentario puede ser muy util para terceros para entender un codigo, el problema es precisamente que deben ser buenos, por eso voy a separar que es un buen comentario de lo que no, y es que muchas veces se usan comentarios para enmdendar algo que sencillamente es mal codigo
+
+### buenos comentarios
+
+#### legales
+
+a veces por estadares de la compañia uno debe poner comentarios legales
+
+```
+// Copyright (C) 2003,2004,2005 by Object Mentor, Inc. All rights reserved.
+// Released under the terms of the GNU General Public License version 2 or later.
+```
+
+#### informativos
+
+a veces pueden dar de manera resumida informacion interesante
+
+```
+// format matched kk:mm:ss EEE, MMM dd, yyyy
+Pattern timeMatcher = Pattern.compile(
+"\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*");
+```
+
+#### explica intencion
+
+a veces esta bueno dar mas contexto sobre el porque de una decision
+
+```java
+public void testConcurrentAddWidgets() throws Exception {
+WidgetBuilder widgetBuilder =
+new WidgetBuilder(new Class[]{BoldWidget.class});
+
+String text = "'''bold text'''";
+ParentWidget parent =
+new BoldWidget(new MockWidgetRoot(), "'''bold text'''");
+AtomicBoolean failFlag = new AtomicBoolean();
+failFlag.set(false);
+//This is our best attempt to get a race condition
+//by creating large number of threads.
+for (int i = 0; i < 25000; i++) {
+WidgetBuilderThread widgetBuilderThread =
+new WidgetBuilderThread(widgetBuilder, text, parent, failFlag);
+Thread thread = new Thread(widgetBuilderThread);
+thread.start();
+}
+assertEquals(false, failFlag.get());
+}
+```
+
+#### clarificacion
+
+si bien las variables y argumentos deberian hablar por si solos a veces o por librerias externas o porque el codigo no se deberia alterar es bueno aclarar cosas
+
+```java
+Public void testCompareTo() throws Exception
+{ WikiPagePath a = PathParser.parse("PageA");
+WikiPagePath ab = PathParser.parse("PageA.PageB");
+WikiPagePath b = PathParser.parse("PageB");
+WikiPagePath aa = PathParser.parse("PageA.PageA");
+WikiPagePath bb = PathParser.parse("PageB.PageB");
+WikiPagePath ba = PathParser.parse("PageB.PageA");
+assertTrue(a.compareTo(a) == 0); // a == a
+assertTrue(a.compareTo(b) != 0); // a != b
+assertTrue(ab.compareTo(ab) == 0); // ab == ab
+assertTrue(a.compareTo(b) == -1); // a < b
+assertTrue(aa.compareTo(ab) == -1); // aa < ab
+assertTrue(ba.compareTo(bb) == -1); // ba < bb
+assertTrue(b.compareTo(a) == 1); // b > a
+assertTrue(ab.compareTo(aa) == 1); // ab > aa
+assertTrue(bb.compareTo(ba) == 1); // bb > ba
+}
+```
+
+no confuntir aclarar con hacer mal el codigo
+
+
+#### advertir consecuencias
+
+a veces es util para advertir de consecuencias a la hora de realizar una tarea
+
+```java
+
+// Don't run unless you
+// have some time to kill.
+public void _testWithReallyBigFile()
+{ writeLinesToFile(10000000);
+response.setBody(testFile);
+response.readyToSend(this);
+String responseString = output.toString();
+assertSubString("Content-Length: 1000000000", responseString);
+assertTrue(bytesSent > 1000000000);
+}
+```
+
+#### TODO
+
+son los menos buenos de los buenos ya que muchas veces uno no termina haciendo lo que dice el TODO
+
+```java
+
+//TODO-MdM these are not needed
+// We expect this to go away when we do the checkout model
+protected VersionInfo makeVersion() throws Exception
+{ return null;
+}
+
+```
+
+### malos comentarios
+
+practicamente todo lo demas, sobre especificar, comentarios redundantes (dicen algo que se ve en el codigo), comentarios que no se correlacionen con lo que esta en el codigo, comentarios tipo diario (flaco usa git), ruido ( mas comentarios redundantes), usar comentarios para remplazar buenos nombres de variables o funciones, position markers, mucha informacion, codigo que no se usa, todo eso esta mal
