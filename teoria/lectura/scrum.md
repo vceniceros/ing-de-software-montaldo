@@ -66,3 +66,8 @@ a veces se confunde con la demo, es un periodo al final de sprint donde se refle
 
 no es una estimacion exacta, busca determinar el esfuerzo relativo de las tareas para que el equipo pueda comprometerse con un volumen de trabajo realista en el Sprint
 
+## burndown chart
+
+![image](https://github.com/user-attachments/assets/6d576c5e-991a-456e-91c5-e45c23687e17)
+
+es un balance entre los story points estimados por sprint vs los story points diarios que fueron descendiendo , se divide en 2 lineas, la ideal que es la promediada vs la real
