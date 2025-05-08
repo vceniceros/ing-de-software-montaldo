@@ -39,6 +39,22 @@ como la arquitectura de software consta de abstracciones en la vista 4 +
 
 ![alt text](image-1.png)
 
+## que ventajas trae
+
+es recurrente en el desarrollo de software el querer representar en diagramas o "planos" la arquitectura es decir el como esta hecho el software, pero el problema empieza cuando uno con un mismo diagrama o lenguaje quiere abarcar todo lo que al proyecto involucra teniendo en cuenta que el mismo puede tener multiples stake holders cada uno con sus respectivas dificultades, por eso la vista 4 + 1 divide el proyecto en 4 stake holders principales lo cual permite un facil entendimiento de cada uno de los diagramas correspondientes
+
+entre sus ventajas se incluye: 
+
+- Claridad para distintos públicos: cada vista está pensada para un grupo específico (desarrolladores, testers, clientes, etc.).
+
+- Mejor comunicación del diseño: al separar preocupaciones, facilita explicar y discutir el sistema entre equipos.
+
+- Detección temprana de errores: los diferentes puntos de vista ayudan a encontrar inconsistencias o problemas antes de implementar.
+
+- Documentación estructurada: proporciona un marco claro y reutilizable para documentar sistemas complejos.
+
+- Soporte para decisiones técnicas: permite justificar elecciones arquitectónicas con base en requerimientos y restricciones.
+
 ## vista logica
 
 se apoya principalmente en los requisitos funcionales, lo que el sistema
