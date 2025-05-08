@@ -6,10 +6,10 @@ es un concepto sobre el cual se amparan ciertas tecnicas, metodologias y filosof
 
 estamos descubriendo formas mejores de desarrollar software tanto propias como para terceros, gracias a esto aprendimos a valorar
 
-*individuos e interacciones* sobre procesos y herramientas
-*Software funcionando* sobre documentancion extensiva
-*colaboracion con el cliente* sobre negociacion contractual
-*Respuesta ante el cambio* sobre seguir un plan
+<p>*individuos e interacciones* sobre procesos y herramientas</p>
+<p>*Software funcionando* sobre documentancion extensiva</p>
+<p>*colaboracion con el cliente* sobre negociacion contractual</p>
+<p>*Respuesta ante el cambio* sobre seguir un plan</p>
 
 aunque valoremos los elementos de la derecha, valoramos mas lo de la izquierda
 
