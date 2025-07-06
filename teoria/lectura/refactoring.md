@@ -20,6 +20,8 @@ es una tecnica de reestructurar el codigo donde se cambia ka estructura interna 
 
 ## codigo oloroso
 
+es una indicacion de que algo no esta bien a nivel estructural en nuestro codigo por mas que este funciones
+
 - codigo duplicado
 - metodos largos
 - clases largas
