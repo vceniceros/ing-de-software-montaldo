@@ -288,7 +288,7 @@ es un patron estructura que ofrece un sustito o marcador de posicion para otro o
 - proxy de registro: cuando quieres mantener un historial de solicitudes en dicho proxy
 - proxy de cache: es cuando necesitas guardar resultados en cache, sobretodo si son muchos
 - referencia inteligente: para poder eliminar el objeto pasado una vez no haya clientes que lo utilicen
-
+  
 #### pros
 
 - controlar al objeto de servicio sin que los clientes lo sepan
@@ -313,3 +313,138 @@ es un patron estructura que ofrece un sustito o marcador de posicion para otro o
 
 Los patrones de comportamiento tratan con algoritmos y la asignación de responsabilidades entre objetos
 
+### Chain of responsability
+
+te pérmite pasar solicitudes a una cadena de manejadores, al recibir una solicitud el manejador decide si procesa la peticion o la pasa al siguiente en la cadena, como muchos patrones de comportamiento este aisla un comportamiento y lo combierte en una clase manejadora, en este caso hacemos que cada objeto reciba por un metodo la peticion, en el mismo objeto debe haber una referencia al siguiente en la cadena, la idea seria que esta peticion sea mandada al siguiente en la cadena de no poder ser procesada
+
+
+#### estructura 
+
+![estructura de chain of responsability](image-69.png)
+
+- manejador: declara una interfaz comun a todos los manejadores concretos, normalmente tiene un unico metodo para manejar solicitudes, a veces puede tener otro para establecer al siguiente manejador
+- manejador base: es opcional pero puede ser el manejador donde se puede colocar el codigo biolerplate (codigo que no va a alterarse), normalmente esta clase define un campo para almacenar la referencia al siguiente manejador
+- manejador concreto: contiene el codigo para procesar las solicitudes, decide si procesarlas y de no poder hacerlo las envia al siguente manejador
+- cliente: puede componer cadenas una sola vez o componerlas dinamicamente
+
+#### casos de uso
+
+- cuando tu programa deba procesar distintos tipos de solicitudes de varias maneras, pero los tipos exactos de solicitudes y sus secuencias no se conozcan de antemano
+- cuando sea fundamental ejecutar varios manejadores en un orden especifico
+- cuando el grupo de manejadores y su orden deban ser cambiados en tiempo de ejecucion
+
+#### pros
+
+- podes controlar el orden de control de solicitudes
+- S de solid: podes desacoplar las clases que invocan operaciones de las que las realizan
+- O de solid: podes incluir nuevos manejadores a la aplicacion sin tocar el cliente
+
+#### contras
+
+- algunas solicitudes pueden no ser gestionadas
+
+#### relacion con otros patrones
+
+- observer: permite a los receptores subscribirse o darse de baja mientras que chain es mandatorio
+- mediator: elimina la conexion directa entre emisores y receptores
+  
+
+### observador
+
+permite definir un mecanismo de subscripcion para notificar a varios objetos sobre cualquier evento que le suceda al objeto que observan, consiste en una clase notificadora y clases subscritas a las cuales dinamicamente se pueden "subsribir" o " darse de baja" al observador, cuando este lanza una notificacion las clases subscriptas la reciben y manejan segun sea necesario
+
+#### estructura
+
+![estructura de observer](image-70.png)
+
+- notificador: este envia eventos de interes a las clases subscriptas ya sea cuando se ejecute un comportamiento o este cambie su estado
+- cuando sucede un nuevo evento el notificador recorre la lista de subscripcion e invoca el metodo de notificacion declarado en la interfaz de cada subscripto
+- Subscriptora: es una interfaz de notificacion, tiene un unico metodo actualizar que reacciona a la notificacion, segun sea necesario puede contener parametros dados por el subscriptor
+- concretos: realizan alguna accion en respuesta a la notificacion, todas las clases deben implementar el mismo interfaz para que el notificador no este acoplado a la clase concreta
+- Normalmente, los suscriptores necesitan cierta información contextual para manejar correctamente la actualización. Por este motivo, a menudo los notificadores pasan cierta información de contexto como argumentos del método de notificación. El notificador puede pasarse a sí mismo como argumento, dejando que los suscriptores extraigan la información necesaria directamente.
+- cliente: crea notificadores y notificados por separado y luego registra los notificados a su notificador
+
+#### casos de uso
+
+- se usa cuando los cambios de estado de un objeto necesitan cambiar otros objetos y el grupo de objetos sea desconocido de antemano o cambie dinamicamente
+- objetos de tu aplicacion deben observar a otro pero solo durante un tiempo limitado o en casos especificos
+
+#### pros
+
+- O de solid: podes introducir nuevas clases subscritoras sin tocar a la notificadora y visceversa
+- podes establecer relaciones entre objetos en tiempo de ejecucion
+  
+#### contras
+
+los subscriptores son notificados en orden aleatorio
+
+
+### state
+
+permite al objeto cambiar su comportamiento en base a su cambio de estado, casi pareciendo otra clase, cuando tengas un comportamiento repetido que varia segun el estado del objeto, podes extraer ese comportamiento en una clase y que este cambie segun en que estado se encuentre la clase que lo use
+
+
+#### estructura 
+
+![estructura de state](image-71.png)
+
+- contexto: almacena una referencia a un estado concreto, y delega todo el trabajo especifico a ese estado, esto mediante la interfaz del estado, el contexto a su vez debe tener un setter de estadoo una manera de alterarlo
+- estado: ees la interfaz que declara los metodos especificos del estado, este debe ser comun a todos los estados concretos
+- concretos: proporcionan implementaciones a los metodos especificos, se puede utilizar clases abstractas intermedias para no duplicar codigo
+- tanto estados como contexto pueden settear el cambio de estados
+
+#### casos de uso
+
+- cuando tengas objetos que cambien segun cambie su estado
+- para eliminar condicionales anidados
+- cuando tengas mucho codigo duplicado por estados similares o muchos condicionales
+
+#### pros
+
+- S de solid: organiza el codigo relacionado con estados particular en clases separadas
+- O de solid: introduce nuevos estados sin cambiar clases de estado existente o concretas
+- simplifica el codigo eliminando maquinas de estado basadas en condicionales
+  
+#### contras
+
+- aplicar el patron puede ser excesivo si no se tiene muchos estados o estos no cambian
+
+#### otros patrones
+
+- strategy: de estructura similar, se diferencia en que los strategy pueden no conocerse entre si, distinto a los estados que puede remplazarse entre si
+
+### strategy 
+
+permite definir una familia de algoritmos, colocar cada uno de ellos en una clase separada y hacer sus objetos intercambiables, sugiere que tomes esa clase que hace algo específico de muchas formas diferentes y extraigas todos esos algoritmos para colocarlos en clases separadas llamadas estrategias, La clase original, llamada contexto, debe tener un campo para almacenar una referencia a una de las estrategias. El contexto delega el trabajo a un objeto de estrategia vinculado en lugar de ejecutarlo por su cuenta.
+
+#### estructura 
+
+![estructura de strategy](image-72.png)
+
+
+- contexto: mantiene una referencia a una de las estrategias concretas y se comunica con este objeto únicamente a través de la interfaz estrategia.
+- estrategia: La interfaz Estrategia es común a todas las estrategias concretas declara un método que la clase contexto utiliza para ejecutar una estrategia.
+- concretas: es la implementacion de cada algoritmo distinto
+- La clase contexto invoca el método de ejecución en el objeto de estrategia vinculado cada vez que necesita ejecutar el algoritmo. La clase contexto no sabe con qué tipo de estrategia funciona o cómo se ejecuta el algoritmo.
+- cliente: crea un objeto de estrategia específico y lo pasa a la clase contexto. La clase contexto expone un modificador set que permite a los clientes sustituir la estrategia asociada al contexto durante el tiempo de ejecución.
+
+#### casos de uso
+
+- cuando quieras utiliza distintas variantes de un algoritmo dentro de un objeto y poder cambiar de un algoritmo a otro durante el tiempo de ejecución
+- cuando tengas muchas clases similares que sólo se diferencien en la forma en que ejecutan cierto comportamiento.
+- para aislar la lógica de negocio de una clase, de los detalles de implementación de algoritmos que pueden no ser tan importantes en el contexto de esa lógica
+- cuando tu clase tenga un enorme operador condicional que cambie entre distintas variantes del mismo algoritmo
+
+#### pros 
+
+- intercambiar algoritmos usados dentro de un objeto durante el tiempo de ejecución.
+- Podes aislar los detalles de implementación de un algoritmo del código que lo utiliza.
+- Podes sustituir la herencia por composición.
+- O de solid: Puedes introducir nuevas estrategias sin tener que cambiar el contexto
+
+
+#### contras
+
+- al pedo si tenes un par de algoritmos que rara vez cambian
+- los clientes deben conocer las diferencias entre estrategias para seleccionar la que va
+- Muchos lenguajes de programación modernos tienen un soporte de tipo funcional que te permite implementar distintas versiones de un algoritmo dentro de un grupo de funciones anónimas. Entonces podes utilizar estas funciones exactamente como habrías utilizado los objetos de estrategia, pero sin saturar tu código con clases e interfaces adicionales.
